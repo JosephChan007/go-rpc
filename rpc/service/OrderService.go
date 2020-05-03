@@ -18,7 +18,7 @@ func OrderHouse() *map[string]message.OrderInfo {
 }
 
 // For rpc
-
+/*
 type OrderService struct {
 }
 
@@ -40,6 +40,7 @@ func (s *OrderService) GetOrder(req *message.OrderRequest, res *message.OrderInf
 
 	return nil
 }
+*/
 
 // For gprc-go
 

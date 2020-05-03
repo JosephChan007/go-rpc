@@ -10,14 +10,14 @@ import (
 
 func main() {
 
-	s := grpc.NewServer()
-	message.RegisterOrderServiceServer(s, new(service.OrderServiceImpl))
+	grpcServer := grpc.NewServer()
+	message.RegisterOrderServiceServer(grpcServer, new(service.OrderServiceImpl))
 
 	lis, err := net.Listen("tcp", ":9091")
 	if err != nil {
 		log.Fatalf("Order service failed to listen: %v", err)
 	}
-	if err := s.Serve(lis); err != nil {
+	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Order service failed to serve: %v", err)
 	}
 }
