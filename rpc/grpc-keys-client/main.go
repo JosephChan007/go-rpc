@@ -11,11 +11,13 @@ import (
 
 func main() {
 
+	// 单向数字签名证书
 	creds, err := credentials.NewClientTLSFromFile("keys-client/server.crt", "hdfs-host3")
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// 用证书调用服务端
 	conn, err := grpc.Dial("hdfs-host3:9091", grpc.WithTransportCredentials(creds))
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
