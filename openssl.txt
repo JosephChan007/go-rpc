@@ -1,12 +1,28 @@
 一、单向自签证书步骤命令:
-1. openssl (注意:此命令要以管理员权限运行)
-2. genrsa -des3 -out server.key 2048
-3. req -new -key server.key -out server.csr (若报错:problem creating object tsa_policy1=1.2.3.4.1，就关闭并重新打开openssl)
+1. openssl
+    注意:此命令要以管理员权限运行
+
+2. 生成根证书:server.key
+    genrsa -des3 -out server.key 2048
+
+3. 根据server.key证书生成server.csr
+    req -new -key server.key -out server.csr
+    注意:若报错:problem creating object tsa_policy1=1.2.3.4.1，就关闭并重新打开openssl
+
 4. 将server.key证书的密码取消，生产对应不带密码的证书:server_no_password.key
-rsa -in server.key -out server_no_password.key
+    rsa -in server.key -out server_no_password.key
+
 5. 用server.csr和server_no_password.key生成最终的证书server.crt
-x509 -req -days 3650 -in server.csr -signkey server_no_password.key -out server.crt
+    x509 -req -days 3650 -in server.csr -signkey server_no_password.key -out server.crt
 
 
 二、双向自签证书步骤命令:
+1. openssl
+    注意:此命令要以管理员权限运行
+
+2. 生成CA根证书:ca.key
+    genrsa -out ca.key 2048
+
+3.
+
 
