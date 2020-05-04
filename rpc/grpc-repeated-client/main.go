@@ -26,14 +26,14 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	list, err := c.GetOrderList(ctx, &message.OrderSize{
+	res, err := c.GetOrderList(ctx, &message.OrderSize{
 		Size: 3,
 	})
 	if err != nil {
 		log.Fatalf("Order client could not invoke: %v", err)
 	}
 
-	for _, v := range list.Orders {
+	for _, v := range res.Orders {
 		log.Printf("Order info is: %v", v)
 	}
 }
