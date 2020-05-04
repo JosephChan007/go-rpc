@@ -1,7 +1,9 @@
 syntax = "proto3";
 
 package message;
-option go_package = "rpc/message";
+option go_package = ".;message";
+
+import "google/api/annotations.proto";
 
 message OrderRequest {
     string OrderId = 1;
@@ -15,5 +17,9 @@ message OrderInfo {
 }
 
 service OrderService {
-    rpc GetOrder(OrderRequest) returns (OrderInfo);
+    rpc GetOrder(OrderRequest) returns (OrderInfo) {
+        option (google.api.http) = {
+            get: "v1/order/{OrderId}"
+        };
+    }
 }
