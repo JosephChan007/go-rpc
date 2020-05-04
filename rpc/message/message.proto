@@ -16,10 +16,20 @@ message OrderInfo {
     string OrderStatus = 3;
 }
 
+message OrderSize {
+    int32 size = 1;
+}
+
+message OrderInfoList {
+    repeated OrderInfo orders = 1;
+}
+
 service OrderService {
     rpc GetOrder(OrderRequest) returns (OrderInfo) {
         option (google.api.http) = {
             get: "v1/order/{OrderId}"
         };
     }
+
+    rpc GetOrderList(OrderSize) returns (OrderInfoList);
 }

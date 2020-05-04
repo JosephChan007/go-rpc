@@ -30,12 +30,12 @@ func ServerCertHelper() credentials.TransportCredentials {
 
 func ClientCertHelper() credentials.TransportCredentials {
 	// 双向数字签名证书
-	cert, err := tls.LoadX509KeyPair("cert-client/client.pem", "cert-client/client.key")
+	cert, err := tls.LoadX509KeyPair("cert/client.pem", "cert/client.key")
 	if err != nil {
 		log.Fatal(err)
 	}
 	certPool := x509.NewCertPool()
-	ca, err := ioutil.ReadFile("cert-client/ca.pem")
+	ca, err := ioutil.ReadFile("cert/ca.pem")
 	if err != nil {
 		log.Fatal(err)
 	}

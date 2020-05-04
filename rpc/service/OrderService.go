@@ -66,3 +66,20 @@ func (s *OrderServiceImpl) GetOrder(ctx context.Context, req *message.OrderReque
 
 	return res, nil
 }
+
+func (s *OrderServiceImpl) GetOrderList(ctx context.Context, req *message.OrderSize) (res *message.OrderInfoList, err error) {
+	fmt.Printf("order list service requst is: %v\n", req)
+
+	orderMap := OrderHouse()
+	od1 := (*orderMap)["1"]
+	od2 := (*orderMap)["3"]
+	od3 := (*orderMap)["4"]
+
+	return &message.OrderInfoList{
+		Orders: []*message.OrderInfo{
+			&od1,
+			&od2,
+			&od3,
+		},
+	}, nil
+}

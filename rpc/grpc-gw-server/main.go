@@ -26,7 +26,7 @@ func main() {
 		}
 
 		httpServer := &http.Server{
-			Addr:    ":9091",	// 此处是http接口的端口
+			Addr:    ":9091",	// 此处是http接口的端口，接口地址: http://hdfs-host3:9091/v1/order/***
 			Handler: muxServer,
 		}
 		httpServer.ListenAndServe()
