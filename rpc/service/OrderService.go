@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/JosephChan007/go-rpc/rpc/message"
+	"log"
 )
 
 func OrderHouse() *map[string]message.OrderInfo {
@@ -74,6 +75,10 @@ func (s *OrderServiceImpl) GetOrderList(ctx context.Context, req *message.OrderS
 	od1 := (*orderMap)["1"]
 	od2 := (*orderMap)["3"]
 	od3 := (*orderMap)["4"]
+
+	log.Printf("Order info is: %v", od1)
+	log.Printf("Order info is: %v", od2)
+	log.Printf("Order info is: %v", od3)
 
 	return &message.OrderInfoList{
 		Orders: []*message.OrderInfo{
