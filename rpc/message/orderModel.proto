@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package message;
+option go_package = ".;message";
+
+
+message OrderRequest {
+    string OrderId = 1;
+    OrderStatus status = 2;
+}
+
+message OrderResponse {
+    string OrderId = 1;
+    string message = 2;
+}
+
+message OrderSize {
+    int32 Size = 1;
+}
+
+message OrderInfoList {
+    repeated OrderInfo orders = 1;
+}
+
+enum OrderStatus {
+    UnPay = 0;          // 待付款
+    Paied = 1;          // 已付款
+    Commited =2;        // 已提交
+    Refund = 3;         // 退款中
+    Refunded = 4;       // 已退款
+}
+
+message OrderData {
+    string OrderId = 1;
+    string OrderName = 2;
+    OrderStatus status = 3;
+}
+
+message OrderInfo {
+    string OrderId = 1;
+    string OrderName = 2;
+    OrderStatus status = 3;
+    google.protobuf.Timestamp OrderTime = 4;
+}

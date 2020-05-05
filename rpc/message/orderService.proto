@@ -4,21 +4,8 @@ package message;
 option go_package = ".;message";
 
 import "google/api/annotations.proto";
-import "model.proto";
+import "orderModel.proto";
 
-
-message OrderRequest {
-    string OrderId = 1;
-    OrderStatus status = 2;
-}
-
-message OrderSize {
-    int32 Size = 1;
-}
-
-message OrderInfoList {
-    repeated OrderInfo orders = 1;
-}
 
 service OrderService {
     rpc GetOrder(OrderRequest) returns (OrderInfo) {
@@ -28,4 +15,6 @@ service OrderService {
     }
 
     rpc GetOrderList(OrderSize) returns (OrderInfoList);
+
+    rpc NewOrder(OrderData) returns (OrderResponse);
 }

@@ -4,7 +4,7 @@ func main() {
 	/*
 		// 以http形式对外提供接口
 		// 由于以下gw文件创建命令报错，故将代码注释
-		// protoc --grpc-gateway_out=logtostderr=true:. message.proto
+		// protoc --grpc-gateway_out=logtostderr=true:. orderService.proto
 
 		// 双向数字签名证书
 		cred := util.ServerCertHelper()

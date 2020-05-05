@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-	s := new(service.OrderService)
+	s := new(service.OrderServiceImpl)
 
 	err := rpc.Register(s)
 	if err != nil {
