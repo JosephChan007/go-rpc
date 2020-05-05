@@ -27,7 +27,7 @@ func main() {
 	defer cancel()
 
 	res, err := c.GetOrder(ctx, &OrderRequest{
-		OrderId: "20200501002",
+		OrderId: "20200501006",
 	})
 	if err != nil {
 		log.Fatalf("Order client could not invoke: %v", err)

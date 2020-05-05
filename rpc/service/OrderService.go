@@ -10,13 +10,16 @@ import (
 	"time"
 )
 
+var orderMap = make(map[string]*message.OrderInfo, 5)
+
 func OrderHouse() *map[string]*message.OrderInfo {
-	orderMap := make(map[string]*message.OrderInfo, 5)
-	orderMap["20200501001"] = &message.OrderInfo{OrderId: "20200501001", OrderName: "橙子", Status: message.OrderStatus_UnPay, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
-	orderMap["20200501002"] = &message.OrderInfo{OrderId: "20200501002", OrderName: "苹果", Status: message.OrderStatus_Paied, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
-	orderMap["20200501003"] = &message.OrderInfo{OrderId: "20200501003", OrderName: "梨", Status: message.OrderStatus_Commited, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
-	orderMap["20200501004"] = &message.OrderInfo{OrderId: "20200501004", OrderName: "香蕉", Status: message.OrderStatus_Refund, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
-	orderMap["20200501005"] = &message.OrderInfo{OrderId: "20200501005", OrderName: "火龙果", Status: message.OrderStatus_Refunded, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+	if len(orderMap) == 0 {
+		orderMap["20200501001"] = &message.OrderInfo{OrderId: "20200501001", OrderName: "橙子", Status: message.OrderStatus_UnPay, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+		orderMap["20200501002"] = &message.OrderInfo{OrderId: "20200501002", OrderName: "苹果", Status: message.OrderStatus_Paied, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+		orderMap["20200501003"] = &message.OrderInfo{OrderId: "20200501003", OrderName: "梨", Status: message.OrderStatus_Commited, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+		orderMap["20200501004"] = &message.OrderInfo{OrderId: "20200501004", OrderName: "香蕉", Status: message.OrderStatus_Refund, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+		orderMap["20200501005"] = &message.OrderInfo{OrderId: "20200501005", OrderName: "火龙果", Status: message.OrderStatus_Refunded, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+	}
 	return &orderMap
 }
 
