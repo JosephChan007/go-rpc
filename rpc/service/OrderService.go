@@ -6,6 +6,7 @@ import (
 	"fmt"
 	. "github.com/JosephChan007/go-rpc/rpc/message"
 	"github.com/golang/protobuf/ptypes/timestamp"
+	"io"
 	"log"
 	"time"
 )
@@ -106,7 +107,7 @@ func (s *OrderServiceImpl) NewOrder(ctx context.Context, req *OrderData) (res *O
 	}, nil
 }
 
-func (s *OrderServiceImpl) GetStatusOrderList(req *OrderStatusRequest, stream OrderService_GetStatusOrderListServer) (err error) {
+func (s *OrderServiceImpl) GetOrderListByServerStream(req *OrderStatusRequest, stream OrderService_GetOrderListByServerStreamServer) error {
 	log.Printf("query status order, data is: %v\n", req)
 
 	status := req.Status
@@ -141,6 +142,35 @@ func (s *OrderServiceImpl) GetStatusOrderList(req *OrderStatusRequest, stream Or
 		}
 		log.Printf("query status order, data is: %v\n", orders)
 		orders = (orders)[0:0]
+	}
+
+	return nil
+}
+
+func (s *OrderServiceImpl) GetOrderListByClientStream(stream OrderService_GetOrderListByClientStreamServer) error {
+
+	orderMap := OrderHouse()
+	orders := make([]*OrderInfo, 0)
+	for {
+		request, err := stream.Recv()
+		log.Printf("query status order, data is: %v\n", request)
+		if err == io.EOF {
+			log.Printf("query status order, data is: %v\n", orders)
+			return stream.SendAndClose(&OrderInfoList{
+				Orders: orders,
+			})
+		}
+		if err != nil {
+			return err
+		}
+		for _, v := range *orderMap {
+			for _, state := range request.Status {
+				if v.Status == state {
+					orders = append(orders, v)
+				}
+			}
+		}
+		time.Sleep(time.Second * 1)
 	}
 
 	return nil

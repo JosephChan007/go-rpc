@@ -5,7 +5,6 @@ import (
 	. "github.com/JosephChan007/go-rpc/rpc/message"
 	"github.com/JosephChan007/go-rpc/rpc/util"
 	"google.golang.org/grpc"
-	"io"
 	"log"
 	"time"
 )
@@ -30,23 +29,28 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 
-	stream, err := c.GetOrderListByServerStream(ctx, &OrderStatusRequest{
-		Status: []OrderStatus{OrderStatus_UnPay, OrderStatus_Paied, OrderStatus_Refunded},
-	})
+	status := []OrderStatus{1, 2, 0, 4}
+
+	stream, err := c.GetOrderListByClientStream(ctx)
 	if err != nil {
-		log.Fatalf("Order client could not invoke: %v", err)
+		log.Fatalf("Order client could not invoke1: %v", err)
 	}
-	for {
-		list, err := stream.Recv()
-		if err == io.EOF {
-			break
-		}
+
+	for _, state := range status {
+		req := &OrderStatusRequest{Status: []OrderStatus{state}}
+		err := stream.Send(req)
 		if err != nil {
-			log.Fatalf("Order client stream could not read: %v", err)
+			log.Printf("Order client could not invoke2: %v", err)
 		}
-		for _, d := range list.Orders {
-			log.Printf("stream data is: %v", d)
-		}
+	}
+
+	response, err := stream.CloseAndRecv()
+	if err != nil {
+		log.Printf("Order client could not invoke3: %v", err)
+	}
+
+	for _, order := range response.Orders {
+		log.Printf("stream data is: %v", order)
 	}
 
 }
