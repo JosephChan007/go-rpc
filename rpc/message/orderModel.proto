@@ -27,7 +27,7 @@ message OrderInfoList {
 enum OrderStatus {
     UnPay = 0;          // 待付款
     Paied = 1;          // 已付款
-    Commited =2;        // 已提交
+    Commited = 2;        // 已提交
     Refund = 3;         // 退款中
     Refunded = 4;       // 已退款
 }

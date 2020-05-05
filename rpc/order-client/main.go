@@ -14,13 +14,13 @@ func main() {
 	}
 
 	var res message.OrderInfo
-	req := &message.OrderRequest{OrderId: "20200501009", Timestamp: 0}
+	req := &message.OrderRequest{OrderId: "20200501009"}
 	err = client.Call("OrderService.GetOrder", req, &res)
 	if err != nil {
 		fmt.Printf("Client call error: %v\n", err)
 		return
 	}
 
-	fmt.Printf("Sync order info is: orderid=%s | ordername=%s | orderstatus=%s\n", res.OrderId, res.OrderName, res.OrderStatus)
+	fmt.Printf("Sync order info is: orderid=%s | ordername=%s | orderstatus=%s\n", res.OrderId, res.OrderName, res.Status)
 
 }
