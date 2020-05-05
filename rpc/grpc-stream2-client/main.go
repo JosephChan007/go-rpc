@@ -5,12 +5,13 @@ import (
 	. "github.com/JosephChan007/go-rpc/rpc/message"
 	"github.com/JosephChan007/go-rpc/rpc/util"
 	"google.golang.org/grpc"
+	"io"
 	"log"
 	"time"
 )
 
 /**
- * 客户端stream
+ * 双向stream
  */
 func main() {
 
@@ -31,26 +32,31 @@ func main() {
 
 	status := []OrderStatus{1, 2, 0, 4}
 
-	stream, err := c.GetOrderListByClientStream(ctx)
+	stream, err := c.GetOrderListByDoubleStream(ctx)
 	if err != nil {
 		log.Fatalf("Order client could not invoke1: %v", err)
 	}
 
 	for _, state := range status {
+
+		// 发送请求
 		req := &OrderStatusRequest{Status: []OrderStatus{state}}
 		err := stream.Send(req)
 		if err != nil {
 			log.Printf("Order client could not invoke2: %v", err)
 		}
-	}
 
-	response, err := stream.CloseAndRecv()
-	if err != nil {
-		log.Printf("Order client could not invoke3: %v", err)
-	}
-
-	for _, order := range response.Orders {
-		log.Printf("stream data is: %v", order)
+		// 接受请求
+		response, err := stream.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalf("Order client could not invoke2: %v", err)
+		}
+		for _, order := range response.Orders {
+			log.Printf("stream data is: %v", order)
+		}
 	}
 
 }

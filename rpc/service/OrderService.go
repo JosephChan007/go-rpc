@@ -175,3 +175,39 @@ func (s *OrderServiceImpl) GetOrderListByClientStream(stream OrderService_GetOrd
 
 	return nil
 }
+
+func (s *OrderServiceImpl) GetOrderListByDoubleStream(stream OrderService_GetOrderListByDoubleStreamServer) error {
+
+	orderMap := OrderHouse()
+	orders := make([]*OrderInfo, 0)
+	for {
+		request, err := stream.Recv()
+		log.Printf("query status order, data is: %v\n", request)
+		if err == io.EOF {
+			log.Printf("query status order, data is: EOF")
+			break
+		}
+		if err != nil {
+			return err
+		}
+		for _, v := range *orderMap {
+			for _, state := range request.Status {
+				if v.Status == state {
+					orders = append(orders, v)
+				}
+			}
+		}
+
+		err = stream.Send(&OrderInfoList{
+			Orders: orders,
+		})
+		if err != nil {
+			log.Printf("Server stream send error: %v", err)
+		}
+		orders = (orders)[0:0]
+
+		time.Sleep(time.Second * 1)
+	}
+
+	return nil
+}

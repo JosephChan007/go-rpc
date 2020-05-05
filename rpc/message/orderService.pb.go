@@ -36,7 +36,7 @@ var file_orderService_proto_rawDesc = []byte{
 	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0x1c, 0x67,
 	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x10, 0x6f, 0x72, 0x64,
-	0x65, 0x72, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xff, 0x02,
+	0x65, 0x72, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xd6, 0x03,
 	0x0a, 0x0c, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x51,
 	0x0a, 0x08, 0x47, 0x65, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x15, 0x2e, 0x6d, 0x65, 0x73,
 	0x73, 0x61, 0x67, 0x65, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
@@ -60,9 +60,14 @@ var file_orderService_proto_rawDesc = []byte{
 	0x6e, 0x74, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x1b, 0x2e, 0x6d, 0x65, 0x73, 0x73, 0x61,
 	0x67, 0x65, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e,
-	0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x4c, 0x69, 0x73, 0x74, 0x28, 0x01, 0x42,
-	0x0b, 0x5a, 0x09, 0x2e, 0x3b, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x4c, 0x69, 0x73, 0x74, 0x28, 0x01, 0x12,
+	0x55, 0x0a, 0x1a, 0x47, 0x65, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x42,
+	0x79, 0x44, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x1b, 0x2e,
+	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x53, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x6d, 0x65, 0x73,
+	0x73, 0x61, 0x67, 0x65, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x4c, 0x69,
+	0x73, 0x74, 0x28, 0x01, 0x30, 0x01, 0x42, 0x0b, 0x5a, 0x09, 0x2e, 0x3b, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_orderService_proto_goTypes = []interface{}{
@@ -80,13 +85,15 @@ var file_orderService_proto_depIdxs = []int32{
 	2, // 2: message.OrderService.NewOrder:input_type -> message.OrderData
 	3, // 3: message.OrderService.GetOrderListByServerStream:input_type -> message.OrderStatusRequest
 	3, // 4: message.OrderService.GetOrderListByClientStream:input_type -> message.OrderStatusRequest
-	4, // 5: message.OrderService.GetOrder:output_type -> message.OrderInfo
-	5, // 6: message.OrderService.GetOrderList:output_type -> message.OrderInfoList
-	6, // 7: message.OrderService.NewOrder:output_type -> message.OrderResponse
-	5, // 8: message.OrderService.GetOrderListByServerStream:output_type -> message.OrderInfoList
-	5, // 9: message.OrderService.GetOrderListByClientStream:output_type -> message.OrderInfoList
-	5, // [5:10] is the sub-list for method output_type
-	0, // [0:5] is the sub-list for method input_type
+	3, // 5: message.OrderService.GetOrderListByDoubleStream:input_type -> message.OrderStatusRequest
+	4, // 6: message.OrderService.GetOrder:output_type -> message.OrderInfo
+	5, // 7: message.OrderService.GetOrderList:output_type -> message.OrderInfoList
+	6, // 8: message.OrderService.NewOrder:output_type -> message.OrderResponse
+	5, // 9: message.OrderService.GetOrderListByServerStream:output_type -> message.OrderInfoList
+	5, // 10: message.OrderService.GetOrderListByClientStream:output_type -> message.OrderInfoList
+	5, // 11: message.OrderService.GetOrderListByDoubleStream:output_type -> message.OrderInfoList
+	6, // [6:12] is the sub-list for method output_type
+	0, // [0:6] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -134,6 +141,7 @@ type OrderServiceClient interface {
 	NewOrder(ctx context.Context, in *OrderData, opts ...grpc.CallOption) (*OrderResponse, error)
 	GetOrderListByServerStream(ctx context.Context, in *OrderStatusRequest, opts ...grpc.CallOption) (OrderService_GetOrderListByServerStreamClient, error)
 	GetOrderListByClientStream(ctx context.Context, opts ...grpc.CallOption) (OrderService_GetOrderListByClientStreamClient, error)
+	GetOrderListByDoubleStream(ctx context.Context, opts ...grpc.CallOption) (OrderService_GetOrderListByDoubleStreamClient, error)
 }
 
 type orderServiceClient struct {
@@ -237,6 +245,37 @@ func (x *orderServiceGetOrderListByClientStreamClient) CloseAndRecv() (*OrderInf
 	return m, nil
 }
 
+func (c *orderServiceClient) GetOrderListByDoubleStream(ctx context.Context, opts ...grpc.CallOption) (OrderService_GetOrderListByDoubleStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_OrderService_serviceDesc.Streams[2], "/message.OrderService/GetOrderListByDoubleStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &orderServiceGetOrderListByDoubleStreamClient{stream}
+	return x, nil
+}
+
+type OrderService_GetOrderListByDoubleStreamClient interface {
+	Send(*OrderStatusRequest) error
+	Recv() (*OrderInfoList, error)
+	grpc.ClientStream
+}
+
+type orderServiceGetOrderListByDoubleStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *orderServiceGetOrderListByDoubleStreamClient) Send(m *OrderStatusRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *orderServiceGetOrderListByDoubleStreamClient) Recv() (*OrderInfoList, error) {
+	m := new(OrderInfoList)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 type OrderServiceServer interface {
 	GetOrder(context.Context, *OrderRequest) (*OrderInfo, error)
@@ -244,6 +283,7 @@ type OrderServiceServer interface {
 	NewOrder(context.Context, *OrderData) (*OrderResponse, error)
 	GetOrderListByServerStream(*OrderStatusRequest, OrderService_GetOrderListByServerStreamServer) error
 	GetOrderListByClientStream(OrderService_GetOrderListByClientStreamServer) error
+	GetOrderListByDoubleStream(OrderService_GetOrderListByDoubleStreamServer) error
 }
 
 // UnimplementedOrderServiceServer can be embedded to have forward compatible implementations.
@@ -264,6 +304,9 @@ func (*UnimplementedOrderServiceServer) GetOrderListByServerStream(*OrderStatusR
 }
 func (*UnimplementedOrderServiceServer) GetOrderListByClientStream(OrderService_GetOrderListByClientStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderListByClientStream not implemented")
+}
+func (*UnimplementedOrderServiceServer) GetOrderListByDoubleStream(OrderService_GetOrderListByDoubleStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetOrderListByDoubleStream not implemented")
 }
 
 func RegisterOrderServiceServer(s *grpc.Server, srv OrderServiceServer) {
@@ -371,6 +414,32 @@ func (x *orderServiceGetOrderListByClientStreamServer) Recv() (*OrderStatusReque
 	return m, nil
 }
 
+func _OrderService_GetOrderListByDoubleStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(OrderServiceServer).GetOrderListByDoubleStream(&orderServiceGetOrderListByDoubleStreamServer{stream})
+}
+
+type OrderService_GetOrderListByDoubleStreamServer interface {
+	Send(*OrderInfoList) error
+	Recv() (*OrderStatusRequest, error)
+	grpc.ServerStream
+}
+
+type orderServiceGetOrderListByDoubleStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *orderServiceGetOrderListByDoubleStreamServer) Send(m *OrderInfoList) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *orderServiceGetOrderListByDoubleStreamServer) Recv() (*OrderStatusRequest, error) {
+	m := new(OrderStatusRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 var _OrderService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "message.OrderService",
 	HandlerType: (*OrderServiceServer)(nil),
@@ -397,6 +466,12 @@ var _OrderService_serviceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetOrderListByClientStream",
 			Handler:       _OrderService_GetOrderListByClientStream_Handler,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "GetOrderListByDoubleStream",
+			Handler:       _OrderService_GetOrderListByDoubleStream_Handler,
+			ServerStreams: true,
 			ClientStreams: true,
 		},
 	},

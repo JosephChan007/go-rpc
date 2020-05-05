@@ -37,15 +37,15 @@ func main() {
 		log.Fatalf("Order client could not invoke: %v", err)
 	}
 	for {
-		list, err := stream.Recv()
+		response, err := stream.Recv()
 		if err == io.EOF {
 			break
 		}
 		if err != nil {
 			log.Fatalf("Order client stream could not read: %v", err)
 		}
-		for _, d := range list.Orders {
-			log.Printf("stream data is: %v", d)
+		for _, order := range response.Orders {
+			log.Printf("stream data is: %v", order)
 		}
 	}
 

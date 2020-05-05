@@ -10,7 +10,7 @@ import (
 )
 
 /**
- * 客户端stream
+ * 双向stream
  */
 func main() {
 
