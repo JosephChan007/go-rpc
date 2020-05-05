@@ -4,21 +4,21 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/JosephChan007/go-rpc/rpc/message"
+	. "github.com/JosephChan007/go-rpc/rpc/message"
 	"github.com/golang/protobuf/ptypes/timestamp"
 	"log"
 	"time"
 )
 
-var orderMap = make(map[string]*message.OrderInfo, 5)
+var orderMap = make(map[string]*OrderInfo, 5)
 
-func OrderHouse() *map[string]*message.OrderInfo {
+func OrderHouse() *map[string]*OrderInfo {
 	if len(orderMap) == 0 {
-		orderMap["20200501001"] = &message.OrderInfo{OrderId: "20200501001", OrderName: "橙子", Status: message.OrderStatus_UnPay, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
-		orderMap["20200501002"] = &message.OrderInfo{OrderId: "20200501002", OrderName: "苹果", Status: message.OrderStatus_Paied, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
-		orderMap["20200501003"] = &message.OrderInfo{OrderId: "20200501003", OrderName: "梨", Status: message.OrderStatus_Commited, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
-		orderMap["20200501004"] = &message.OrderInfo{OrderId: "20200501004", OrderName: "香蕉", Status: message.OrderStatus_Refund, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
-		orderMap["20200501005"] = &message.OrderInfo{OrderId: "20200501005", OrderName: "火龙果", Status: message.OrderStatus_Refunded, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+		orderMap["20200501001"] = &OrderInfo{OrderId: "20200501001", OrderName: "橙子", Status: OrderStatus_UnPay, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+		orderMap["20200501002"] = &OrderInfo{OrderId: "20200501002", OrderName: "苹果", Status: OrderStatus_Paied, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+		orderMap["20200501003"] = &OrderInfo{OrderId: "20200501003", OrderName: "梨", Status: OrderStatus_Commited, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+		orderMap["20200501004"] = &OrderInfo{OrderId: "20200501004", OrderName: "香蕉", Status: OrderStatus_Refund, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+		orderMap["20200501005"] = &OrderInfo{OrderId: "20200501005", OrderName: "火龙果", Status: OrderStatus_Refunded, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
 	}
 	return &orderMap
 }
@@ -53,7 +53,7 @@ func (s *OrderService) GetOrder(req *message.OrderRequest, res *message.OrderInf
 type OrderServiceImpl struct {
 }
 
-func (s *OrderServiceImpl) GetOrder(ctx context.Context, req *message.OrderRequest) (res *message.OrderInfo, err error) {
+func (s *OrderServiceImpl) GetOrder(ctx context.Context, req *OrderRequest) (res *OrderInfo, err error) {
 	log.Printf("order service requst is: %v\n", req)
 
 	orderMap := OrderHouse()
@@ -73,35 +73,75 @@ func (s *OrderServiceImpl) GetOrder(ctx context.Context, req *message.OrderReque
 	return res, nil
 }
 
-func (s *OrderServiceImpl) GetOrderList(ctx context.Context, req *message.OrderSize) (res *message.OrderInfoList, err error) {
+func (s *OrderServiceImpl) GetOrderList(ctx context.Context, req *OrderSize) (res *OrderInfoList, err error) {
 	log.Printf("order list service requst is: %v\n", req)
 
 	orderMap := OrderHouse()
-	list := make([]*message.OrderInfo, 0)
+	list := make([]*OrderInfo, 0)
 	for _, v := range *orderMap {
 		list = append(list, v)
 	}
 
-	return &message.OrderInfoList{
+	return &OrderInfoList{
 		Orders: list,
 	}, nil
 }
 
-func (s *OrderServiceImpl) NewOrder(ctx context.Context, req *message.OrderData) (res *message.OrderResponse, err error) {
+func (s *OrderServiceImpl) NewOrder(ctx context.Context, req *OrderData) (res *OrderResponse, err error) {
 	log.Printf("create a new order, data is: %v\n", req)
 
 	orderMap := OrderHouse()
 	if _, exist := (*orderMap)[req.OrderId]; exist {
-		return &message.OrderResponse{
+		return &OrderResponse{
 			OrderId: "-1",
 			Message: "failed",
 		}, nil
 	}
 
-	(*orderMap)[req.OrderId] = &message.OrderInfo{OrderId: req.OrderId, OrderName: req.OrderName, Status: req.Status, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+	(*orderMap)[req.OrderId] = &OrderInfo{OrderId: req.OrderId, OrderName: req.OrderName, Status: req.Status, OrderTime: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
 	log.Printf("create a new order success, data is: %v\n", (*orderMap)[req.OrderId])
-	return &message.OrderResponse{
+	return &OrderResponse{
 		OrderId: (*orderMap)[req.OrderId].OrderId,
 		Message: "ok",
 	}, nil
+}
+
+func (s *OrderServiceImpl) GetStatusOrderList(req *OrderStatusRequest, stream OrderService_GetStatusOrderListServer) (err error) {
+	log.Printf("query status order, data is: %v\n", req)
+
+	status := req.Status
+	orderMap := OrderHouse()
+	orders := make([]*OrderInfo, 0)
+	for _, v := range *orderMap {
+		for _, state := range status {
+			if state != v.Status {
+				continue
+			}
+			orders = append(orders, v)
+			if len(orders)%2 == 0 && len(orders) > 0 {
+				err := stream.Send(&OrderInfoList{
+					Orders: orders,
+				})
+				if err != nil {
+					return err
+				}
+				log.Printf("query status order, data is: %v\n", orders)
+				time.Sleep(time.Second)
+				orders = (orders)[0:0]
+			}
+		}
+	}
+
+	if len(orders) > 0 {
+		err := stream.Send(&OrderInfoList{
+			Orders: orders,
+		})
+		if err != nil {
+			return err
+		}
+		log.Printf("query status order, data is: %v\n", orders)
+		orders = (orders)[0:0]
+	}
+
+	return nil
 }

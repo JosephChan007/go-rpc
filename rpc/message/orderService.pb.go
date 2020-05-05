@@ -36,7 +36,7 @@ var file_orderService_proto_rawDesc = []byte{
 	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0x1c, 0x67,
 	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x10, 0x6f, 0x72, 0x64,
-	0x65, 0x72, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xd5, 0x01,
+	0x65, 0x72, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xa2, 0x02,
 	0x0a, 0x0c, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x51,
 	0x0a, 0x08, 0x47, 0x65, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x15, 0x2e, 0x6d, 0x65, 0x73,
 	0x73, 0x61, 0x67, 0x65, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
@@ -50,27 +50,35 @@ var file_orderService_proto_rawDesc = []byte{
 	0x08, 0x4e, 0x65, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x12, 0x2e, 0x6d, 0x65, 0x73, 0x73,
 	0x61, 0x67, 0x65, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x44, 0x61, 0x74, 0x61, 0x1a, 0x16, 0x2e,
 	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x0b, 0x5a, 0x09, 0x2e, 0x3b, 0x6d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4b, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x53, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x1b, 0x2e, 0x6d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x53, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x6d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x4c, 0x69, 0x73, 0x74,
+	0x30, 0x01, 0x42, 0x0b, 0x5a, 0x09, 0x2e, 0x3b, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_orderService_proto_goTypes = []interface{}{
-	(*OrderRequest)(nil),  // 0: message.OrderRequest
-	(*OrderSize)(nil),     // 1: message.OrderSize
-	(*OrderData)(nil),     // 2: message.OrderData
-	(*OrderInfo)(nil),     // 3: message.OrderInfo
-	(*OrderInfoList)(nil), // 4: message.OrderInfoList
-	(*OrderResponse)(nil), // 5: message.OrderResponse
+	(*OrderRequest)(nil),       // 0: message.OrderRequest
+	(*OrderSize)(nil),          // 1: message.OrderSize
+	(*OrderData)(nil),          // 2: message.OrderData
+	(*OrderStatusRequest)(nil), // 3: message.OrderStatusRequest
+	(*OrderInfo)(nil),          // 4: message.OrderInfo
+	(*OrderInfoList)(nil),      // 5: message.OrderInfoList
+	(*OrderResponse)(nil),      // 6: message.OrderResponse
 }
 var file_orderService_proto_depIdxs = []int32{
 	0, // 0: message.OrderService.GetOrder:input_type -> message.OrderRequest
 	1, // 1: message.OrderService.GetOrderList:input_type -> message.OrderSize
 	2, // 2: message.OrderService.NewOrder:input_type -> message.OrderData
-	3, // 3: message.OrderService.GetOrder:output_type -> message.OrderInfo
-	4, // 4: message.OrderService.GetOrderList:output_type -> message.OrderInfoList
-	5, // 5: message.OrderService.NewOrder:output_type -> message.OrderResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	3, // 3: message.OrderService.GetStatusOrderList:input_type -> message.OrderStatusRequest
+	4, // 4: message.OrderService.GetOrder:output_type -> message.OrderInfo
+	5, // 5: message.OrderService.GetOrderList:output_type -> message.OrderInfoList
+	6, // 6: message.OrderService.NewOrder:output_type -> message.OrderResponse
+	5, // 7: message.OrderService.GetStatusOrderList:output_type -> message.OrderInfoList
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -116,6 +124,7 @@ type OrderServiceClient interface {
 	GetOrder(ctx context.Context, in *OrderRequest, opts ...grpc.CallOption) (*OrderInfo, error)
 	GetOrderList(ctx context.Context, in *OrderSize, opts ...grpc.CallOption) (*OrderInfoList, error)
 	NewOrder(ctx context.Context, in *OrderData, opts ...grpc.CallOption) (*OrderResponse, error)
+	GetStatusOrderList(ctx context.Context, in *OrderStatusRequest, opts ...grpc.CallOption) (OrderService_GetStatusOrderListClient, error)
 }
 
 type orderServiceClient struct {
@@ -153,11 +162,44 @@ func (c *orderServiceClient) NewOrder(ctx context.Context, in *OrderData, opts .
 	return out, nil
 }
 
+func (c *orderServiceClient) GetStatusOrderList(ctx context.Context, in *OrderStatusRequest, opts ...grpc.CallOption) (OrderService_GetStatusOrderListClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_OrderService_serviceDesc.Streams[0], "/message.OrderService/GetStatusOrderList", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &orderServiceGetStatusOrderListClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type OrderService_GetStatusOrderListClient interface {
+	Recv() (*OrderInfoList, error)
+	grpc.ClientStream
+}
+
+type orderServiceGetStatusOrderListClient struct {
+	grpc.ClientStream
+}
+
+func (x *orderServiceGetStatusOrderListClient) Recv() (*OrderInfoList, error) {
+	m := new(OrderInfoList)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 type OrderServiceServer interface {
 	GetOrder(context.Context, *OrderRequest) (*OrderInfo, error)
 	GetOrderList(context.Context, *OrderSize) (*OrderInfoList, error)
 	NewOrder(context.Context, *OrderData) (*OrderResponse, error)
+	GetStatusOrderList(*OrderStatusRequest, OrderService_GetStatusOrderListServer) error
 }
 
 // UnimplementedOrderServiceServer can be embedded to have forward compatible implementations.
@@ -172,6 +214,9 @@ func (*UnimplementedOrderServiceServer) GetOrderList(context.Context, *OrderSize
 }
 func (*UnimplementedOrderServiceServer) NewOrder(context.Context, *OrderData) (*OrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewOrder not implemented")
+}
+func (*UnimplementedOrderServiceServer) GetStatusOrderList(*OrderStatusRequest, OrderService_GetStatusOrderListServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetStatusOrderList not implemented")
 }
 
 func RegisterOrderServiceServer(s *grpc.Server, srv OrderServiceServer) {
@@ -232,6 +277,27 @@ func _OrderService_NewOrder_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_GetStatusOrderList_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(OrderStatusRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(OrderServiceServer).GetStatusOrderList(m, &orderServiceGetStatusOrderListServer{stream})
+}
+
+type OrderService_GetStatusOrderListServer interface {
+	Send(*OrderInfoList) error
+	grpc.ServerStream
+}
+
+type orderServiceGetStatusOrderListServer struct {
+	grpc.ServerStream
+}
+
+func (x *orderServiceGetStatusOrderListServer) Send(m *OrderInfoList) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 var _OrderService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "message.OrderService",
 	HandlerType: (*OrderServiceServer)(nil),
@@ -249,6 +315,12 @@ var _OrderService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _OrderService_NewOrder_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GetStatusOrderList",
+			Handler:       _OrderService_GetStatusOrderList_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "orderService.proto",
 }

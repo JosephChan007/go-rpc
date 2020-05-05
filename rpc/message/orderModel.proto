@@ -44,3 +44,7 @@ message OrderInfo {
     OrderStatus status = 3;
     google.protobuf.Timestamp OrderTime = 4;
 }
+
+message OrderStatusRequest {
+    repeated OrderStatus status = 1;
+}

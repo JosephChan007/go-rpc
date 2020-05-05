@@ -17,4 +17,6 @@ service OrderService {
     rpc GetOrderList(OrderSize) returns (OrderInfoList);
 
     rpc NewOrder(OrderData) returns (OrderResponse);
+
+    rpc GetStatusOrderList(OrderStatusRequest) returns (stream OrderInfoList);
 }
