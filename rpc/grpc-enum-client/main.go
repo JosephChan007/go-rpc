@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"github.com/JosephChan007/go-rpc/rpc/message"
+	. "github.com/JosephChan007/go-rpc/rpc/message"
 	"github.com/JosephChan007/go-rpc/rpc/util"
 	"google.golang.org/grpc"
 	"log"
@@ -21,16 +21,16 @@ func main() {
 	}
 	defer conn.Close()
 
-	c := message.NewOrderServiceClient(conn)
+	c := NewOrderServiceClient(conn)
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	res, err := c.GetOrder(ctx, &message.OrderRequest{
-		Status: message.OrderStatus_UnPay,
+	res, err := c.GetOrder(ctx, &OrderRequest{
+		Status: OrderStatus_Commited,
 	})
 	if err != nil {
 		log.Fatalf("Order client could not invoke: %v", err)
 	}
-	log.Printf("Order info is: %v", res)
+	log.Printf("Order info is: %#v", res)
 }

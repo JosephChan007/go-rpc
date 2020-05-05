@@ -4,16 +4,12 @@ package message;
 option go_package = ".;message";
 
 import "google/api/annotations.proto";
+import "model.proto";
+
 
 message OrderRequest {
     string OrderId = 1;
     OrderStatus status = 2;
-}
-
-message OrderInfo {
-    string OrderId = 1;
-    string OrderName = 2;
-    OrderStatus status = 3;
 }
 
 message OrderSize {
@@ -22,14 +18,6 @@ message OrderSize {
 
 message OrderInfoList {
     repeated OrderInfo orders = 1;
-}
-
-enum OrderStatus {
-    UnPay = 0;          // 待付款
-    Paied = 1;          // 已付款
-    Commited =2;        // 已提交
-    Refund = 3;         // 退款中
-    Refunded = 4;       // 已退款
 }
 
 service OrderService {
